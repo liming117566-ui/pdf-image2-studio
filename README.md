@@ -13,6 +13,12 @@
 - image2 生成队列、并发控制、失败重试和结果下载
 - Cookie 会话认证、请求限流、上传大小限制和自动清理旧项目
 
+## 项目预览
+
+![PDF Image2 Studio 工作台](docs/screenshots/workspace.png)
+
+截图仅展示本地工作台界面，不包含生产地址、账号、密钥或用户文件。
+
 ## 本地运行
 
 ```powershell
@@ -50,6 +56,18 @@ docker compose up -d --build
 ## 安全提示
 
 不要把 `.env`、API 密钥、生产数据库、上传 PDF 或生成结果提交到仓库。生产环境应使用 HTTPS，并设置强访问密码。
+
+## 质量与安全
+
+- `npm run check`：检查服务端和浏览器脚本语法
+- `npm test`：运行仓库级冒烟测试
+- GitHub Actions 会在 push 和 pull request 时自动执行检查
+- 漏洞报告流程见 [SECURITY.md](SECURITY.md)
+- 版本变更记录见 [CHANGELOG.md](CHANGELOG.md)
+
+## 参与贡献
+
+欢迎通过 GitHub Issue 提交可复现的问题或功能建议，并通过 Pull Request 提交修复。提交内容不得包含 API 密钥、密码、生产配置、PDF 原文件或生成结果。
 
 ## License
 
