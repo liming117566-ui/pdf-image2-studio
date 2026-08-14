@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f1eb" />
+    <title>Page Atelier · PDF Image2 Studio</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-mark"><span class="brand-dot"></span><span>PAGE ATELIER</span></div>
+        <div class="topbar-right"><span class="status-dot"></span><span id="healthText">连接检查中</span><button id="logoutButton" class="ghost-button hidden">退出</button></div>
+      </header>
+
+      <main class="workspace">
+        <section class="intro-row">
+          <div><p class="eyebrow">PDF · IMAGE2 WORKBENCH</p><h1>把书页变成<br /><em>新的视觉版本。</em></h1></div>
+          <p class="intro-copy">上传一本 PDF，挑选需要处理的页面，输入一次提示词，逐页生成并保留每一张结果。</p>
+        </section>
+
+        <section id="loginPanel" class="login-panel panel">
+          <div><p class="eyebrow">PRIVATE WORKSPACE</p><h2>输入访问密码</h2><p class="muted">这是独立部署的工作台，生成接口密钥不会出现在浏览器中。</p></div>
+          <form id="loginForm" class="inline-form"><input id="passwordInput" type="password" autocomplete="current-password" placeholder="访问密码" required /><button class="primary-button" type="submit">进入工作台</button><span id="loginError" class="form-error"></span></form>
+        </section>
+
+        <section id="studio" class="hidden">
+          <div class="stepper"><span class="step active"><b>01</b> 上传 PDF</span><span class="step-line"></span><span class="step"><b>02</b> 选择页面</span><span class="step-line"></span><span class="step"><b>03</b> 生成与下载</span></div>
+          <div class="upload-row">
+            <label class="dropzone" for="pdfInput"><input id="pdfInput" type="file" accept="application/pdf,.pdf" /><span class="upload-icon">↑</span><strong>选择 PDF 文件</strong><span class="muted">单文件，最大 120 MB</span></label>
+            <div id="projectMeta" class="project-meta hidden"><span class="eyebrow">CURRENT DOCUMENT</span><strong id="projectName"></strong><span id="projectCount" class="muted"></span><button id="newProjectButton" class="secondary-button" type="button">换一本 PDF</button></div>
+          </div>
+          <div id="uploadProgress" class="progress-line hidden"><span></span><b>正在读取 PDF 页数...</b></div>
+
+          <section id="extractStage" class="panel hidden">
+            <div class="section-head"><div><p class="eyebrow">PAGE EXTRACTION</p><h2>输入要提取的页面</h2></div><span class="prompt-hint">支持单页、连续范围和逗号组合</span></div>
+            <form id="extractForm" class="inline-form"><input id="pageRangeInput" type="text" inputmode="text" autocomplete="off" placeholder="例如：1-10, 20, 25-27" aria-label="要提取的页码或范围" required /><button id="extractButton" class="primary-button" type="submit">提取页面</button></form>
+            <p id="extractHint" class="muted"></p>
+            <p id="extractError" class="form-error"></p>
+          </section>
+
+          <div id="pageStage" class="panel hidden">
+            <div class="section-head"><div><p class="eyebrow">PAGE SELECTOR</p><h2>选择要生成的页面</h2></div><div class="selection-actions"><span id="selectionCount">0 页已选</span><button id="selectAllButton" class="text-button" type="button">全选</button><button id="clearAllButton" class="text-button" type="button">清空</button></div></div>
+            <div id="pageGrid" class="page-grid"></div>
+          </div>
+
+          <div id="promptStage" class="panel hidden">
+            <div class="section-head"><div><p class="eyebrow">IMAGE2 EDIT BRIEF</p><h2>描述你想要的版本</h2></div><span class="prompt-hint">每个选中页面生成 1 张</span></div>
+            <textarea id="promptInput" rows="5" placeholder="例如：旧书籍页面，复古纸质书页，红蓝双色印刷体学生批注笔记，划线、箭头、侧边小字注解"></textarea>
+            <div class="controls-row"><label><span>文字保真</span><select id="fidelityInput"><option value="safe">保留原版式与正文</option><option value="free">允许自由重绘</option></select></label><label><span>画面比例</span><select id="sizeInput"><option value="portrait">2:3 竖版书页</option><option value="three-four">3:4 竖版（严格输出）</option><option value="landscape">横版</option><option value="square">方形</option></select></label><button id="generateButton" class="primary-button" type="button">开始生成 <span>↗</span></button></div>
+            <p id="generateError" class="form-error"></p>
+          </div>
+
+          <div id="resultsStage" class="panel hidden">
+            <div class="section-head"><div><p class="eyebrow">OUTPUTS</p><h2>生成结果</h2></div><button id="downloadAllButton" class="secondary-button" type="button">下载已完成图片</button></div>
+            <div id="taskList" class="task-list"></div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"><span>PAGE ATELIER</span><span>PDF pages · image2 edits</span></footer>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
