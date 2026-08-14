@@ -1,0 +1,13 @@
+node_modules/
+data/
+data-local-test/
+.env
+*.db
+*.db-shm
+*.db-wal
+uploads/
+projects/
+backups/
+npm-debug.log*
+.DS_Store
+
